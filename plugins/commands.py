@@ -477,5 +477,12 @@ async def cb_handler(client: Client, query: CallbackQuery):
 # Please see < https://github.com/IamDvis/DV-FILESTORE/blob/master/LICENSE >
     
     elif query.data == "clone":
-        buttons = [[
-            InlineKeyboardButton('Hᴏᴍᴇ', callback_data='home')
+        buttons = [
+    [
+        InlineKeyboardButton('Hᴏᴍᴇ', callback_data='home'),
+        InlineKeyboardButton('Aʙᴏᴜᴛ', callback_data='about')
+    ],
+    [
+        InlineKeyboardButton('Sᴜᴘᴘᴏʀᴛ', url='https://example.com')
+    ]
+        ]
