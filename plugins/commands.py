@@ -478,4 +478,4 @@ async def cb_handler(client: Client, query: CallbackQuery):
     
     elif query.data == "clone":
         buttons = [[
-            InlineKeyboardButton('Hᴏᴍᴇ', callback_data=
+            InlineKeyboardButton('Hᴏᴍᴇ', callback_data='home')
