@@ -26,12 +26,44 @@ import json
 import base64
 from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import CommandHandler, CallbackContext
-from pyrogram import InlineKeyboardButton
-
-# Correcting your previous code with closing parentheses
-InlineKeyboardButton('Hᴏᴍᴇ', callback_data='home_callback')
 from urllib.parse import quote_plus
 from ERASTORE.utils.file_properties import get_name, get_hash, get_media_file_size
+from telegram import ReplyKeyboardMarkup, Update
+from telegram.ext import CallbackContext, CommandHandler
+
+# Define the Side Menu with ReplyKeyboardMarkup
+main_menu_keyboard = [
+    ['/start', '/batch'],        # First row buttons
+    ['/base_site', '/broadcast'] # Second row buttons
+]
+main_menu = ReplyKeyboardMarkup(main_menu_keyboard, resize_keyboard=True)
+
+# /start Command
+def start(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        "Welcome to your bot! Here are some quick actions you can use:",
+        reply_markup=main_menu
+    )
+
+# /batch Command
+def batch(update: Update, context: CallbackContext):
+    update.message.reply_text("Batch command executed!")
+
+# /base_site Command
+def base_site(update: Update, context: CallbackContext):
+    update.message.reply_text("Base site command executed!")
+
+# /broadcast Command
+def broadcast(update: Update, context: CallbackContext):
+    update.message.reply_text("Broadcast command executed!")
+
+# Function to Add All Command Handlers
+def main(dispatcher):
+    # Add handlers for each command
+    dispatcher.add_handler(CommandHandler("start", start))
+    dispatcher.add_handler(CommandHandler("batch", batch))
+    dispatcher.add_handler(CommandHandler("base_site", base_site))
+    dispatcher.add_handler(CommandHandler("broadcast", broadcast))
 logger = logging.getLogger(__name__)
 
 BATCH_FILES = {}
@@ -80,40 +112,6 @@ async def start(client, message):
         )
         return
         
-# Define the Side Menu
-main_menu_keyboard = [
-    ['/start', '/batch'],        # First row buttons
-    ['/base_site', '/broadcast'] # Second row buttons
-]
-main_menu = ReplyKeyboardMarkup(main_menu_keyboard, resize_keyboard=True)
-
-# /start Command
-def start(update: Update, context: CallbackContext):
-    update.message.reply_text(
-        "Welcome to your bot! Here are some quick actions you can use:",
-        reply_markup=main_menu
-    )
-
-# /batch Command
-def batch(update: Update, context: CallbackContext):
-    update.message.reply_text("Batch command executed!")
-
-# /base_site Command
-def base_site(update: Update, context: CallbackContext):
-    update.message.reply_text("Base site command executed!")
-
-# /broadcast Command
-def broadcast(update: Update, context: CallbackContext):
-    update.message.reply_text("Broadcast command executed!")
-
-# Function to Add All Command Handlers
-def main(dispatcher):
-    # Add handlers for each command
-    dispatcher.add_handler(CommandHandler("start", start))
-    dispatcher.add_handler(CommandHandler("batch", batch))
-    dispatcher.add_handler(CommandHandler("base_site", base_site))
-    dispatcher.add_handler(CommandHandler("broadcast", broadcast))
-
 # Ensure to call `main(dispatcher)` in your bot's main file.
 # This file is part of < https://github.com/IamDvis/DV-FILESTORE > project,
 # and is released under the MIT License.
